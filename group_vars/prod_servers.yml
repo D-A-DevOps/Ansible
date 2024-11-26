@@ -1,0 +1,4 @@
+ansible_user: ladmin
+ansible_ssh_private_key_file: /home/ladmin/.ssh/id_rsa_lnx2
+environment: PRODUCTION
+owner: Damir
