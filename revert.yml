@@ -1,0 +1,23 @@
+---
+- name: Revert changes made by previous playbook
+  hosts: all
+  become: yes
+  tasks:
+    - name: Remove ladmin from ansible group
+      user:
+        name: ladmin
+        groups: ansible
+        append: no
+
+    - name: Remove ansible group if it's empty
+      group:
+        name: ansible
+        state: absent
+        force: yes
+
+    - name: Remove sudoers entry for ansible group
+      lineinfile:
+        path: /etc/sudoers
+        regexp: '%ansible'
+        state: absent
+        validate: '/usr/sbin/visudo -cf %s'

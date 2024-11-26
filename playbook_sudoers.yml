@@ -1,0 +1,23 @@
+---
+- name: Configure passwordless sudo for ansible group
+  hosts: all
+  become: yes
+  tasks:
+    - name: Create ansible group
+      group:
+        name: ansible
+        state: present
+
+    - name: Add ladmin to ansible group
+      user:
+        name: ladmin
+        groups: ansible
+        append: yes
+
+    - name: Allow ansible group to run specific commands without password
+      lineinfile:
+        path: /etc/sudoers
+        regexp: '%ansible'
+        line: '%ansible ALL=(ALL) NOPASSWD: /usr/bin/ansible-playbook, /usr/bin/ansible, /usr/bin/ansible-inventory'
+        validate: '/usr/sbin/visudo -cf %s'
+
