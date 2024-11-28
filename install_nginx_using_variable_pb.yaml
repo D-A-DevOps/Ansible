@@ -1,0 +1,12 @@
+---
+
+- name: Install package
+  hosts: all
+  become: yes
+  vars:
+    package_name: "nginx"
+  tasks:
+    - name: Install package
+      apt:
+        name: "{{package_name}}"
+        state: present

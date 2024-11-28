@@ -1,0 +1,12 @@
+---
+- name: Install nginx conditionally
+  hosts: all
+  become: yes
+  vars:
+    install_nginx: true
+  tasks:
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: absent
+      when: install_nginx

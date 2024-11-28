@@ -1,0 +1,14 @@
+---
+
+- name: Set up database with encrypted password
+  hosts: all
+  become: yes
+  vars_files:
+    - db_password.yml
+  tasks:
+    - name: Create db user
+      mysql_user:
+        name: dbuser
+        password: "{{ db_password }}"
+        state: present
+        login_user: root

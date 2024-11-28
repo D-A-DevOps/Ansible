@@ -1,0 +1,18 @@
+---
+- name: Configure nginx
+  hosts: all
+  become: yes
+  tasks:
+    - name: Copy nginx config file
+      copy:
+        src: /path/to/local/nginx.conf
+        dest: /etc/nginx/nginx/conf
+      notify:
+        - Restart nginx
+
+
+  handlers:
+    - name: Restart nginx
+      service:
+        name: nginx
+        state: restarted

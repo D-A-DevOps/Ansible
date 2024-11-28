@@ -1,0 +1,7 @@
+---
+- name: Gather and display facts
+  hosts: all
+  tasks:
+    - name: Gather system information
+      debug:
+        msg: "The OS is {{ ansible_facts['distribution'] }} version {{ ansible_facts['distribution_version'] }}"

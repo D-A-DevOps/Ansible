@@ -1,0 +1,11 @@
+---
+# tasks file for nginx_role
+- name: Install nginx
+  apt:
+    name: nginx
+    state: absent
+- name: Start nginx
+  service:
+    name: nginx
+    state: started
+    enabled: yes
